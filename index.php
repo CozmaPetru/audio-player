@@ -48,6 +48,7 @@ unset($_SESSION['flash']);
     <!-- Header -->
     <header class="border-b border-stone-200 bg-paper/90 backdrop-blur sticky top-0 z-20">
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center gap-3">
+        
             <span class="grid place-items-center size-9 rounded-full bg-accent text-white">
                 <?= icon('music', 'w-5 h-5') ?>
             </span>
@@ -57,6 +58,8 @@ unset($_SESSION['flash']);
             </span>
         </div>
     </header>
+
+<!-- Mesajul de succes -->
 
     <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
 
@@ -70,7 +73,8 @@ unset($_SESSION['flash']);
             </div>
         <?php endif; ?>
 
-        <!-- Upload -->
+        <!-- Incarca -->
+
         <section class="rounded-2xl border-2 border-dashed border-stone-300 bg-white/60 p-5 sm:p-6">
             <div class="flex flex-col sm:flex-row sm:items-center gap-4">
                 <div class="flex-1">
@@ -93,9 +97,10 @@ unset($_SESSION['flash']);
             </div>
         </section>
 
+         <!-- Biblioteca -->
+         
         <div class="grid lg:grid-cols-5 gap-6 items-start">
 
-            <!-- Biblioteca -->
             <section class="lg:col-span-3 rounded-2xl bg-white border border-stone-200 shadow-sm overflow-hidden">
                 <div class="flex items-center justify-between px-5 py-4 border-b border-stone-200">
                     <h2 class="font-serif text-lg font-semibold">Biblioteca</h2>
@@ -190,7 +195,7 @@ unset($_SESSION['flash']);
         </div>
     </main>
 
-    <!-- Player fix jos -->
+    <!-- Player jos -->
     <div class="fixed bottom-0 inset-x-0 z-30 bg-white/95 backdrop-blur border-t border-stone-200
                 shadow-[0_-8px_30px_rgba(28,25,23,.08)] pb-[env(safe-area-inset-bottom)]">
         <div class="max-w-6xl mx-auto px-4 py-3 space-y-2">

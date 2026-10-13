@@ -8,7 +8,7 @@ function playAt(i) {
     if (!queue[i]) return;
     index = i;
     player.src = queue[i].dataset.src;
-    label.textContent = "▶ " + queue[i].dataset.title;
+  
     player.play();
 }
 

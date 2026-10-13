@@ -1,7 +1,8 @@
 <?php
-require 'config.php';
-require 'includes/files.php';
-require 'includes/playlist.php';
+   require 'config.php';
+   require 'includes/files.php';
+   require 'includes/playlist.php';
+   require 'includes/icons.php';
 
 $_SESSION['csrf'] ??= bin2hex(random_bytes(16));
 $csrf     = $_SESSION['csrf'];
@@ -23,7 +24,7 @@ unset($_SESSION['flash']);
 <body class="bg-gray-100 text-gray-800 min-h-screen pb-40">
 
     <header class="bg-indigo-600 text-white p-4 shadow">
-        <h1 class="text-xl md:text-2xl font-bold max-w-6xl mx-auto">🎵 Player Audio MP3</h1>
+      <h1 class="text-xl md:text-2xl font-bold max-w-6xl mx-auto flex items-center gap-2"><?= icon('music', 'w-6 h-6') ?> Player Audio MP3</h1>
     </header>
 
     <main class="max-w-6xl mx-auto p-4 space-y-6">
@@ -43,7 +44,7 @@ unset($_SESSION['flash']);
                 <input type="hidden" name="action" value="upload">
                 <input type="file" name="mp3" accept=".mp3,audio/mpeg" required
                     class="flex-1 border rounded p-2 text-sm">
-                <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">Încarcă</button>
+               <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded inline-flex items-center justify-center gap-2"><?= icon('upload') ?> Încarcă</button>
             </form>
         </section>
 
@@ -64,16 +65,17 @@ unset($_SESSION['flash']);
                                 </p>
                             </div>
                             <div class="flex flex-wrap gap-1 text-sm">
-                                <button class="play-btn px-2 py-1 bg-green-500 text-white rounded"
-                                    data-src="<?= AUDIO_URL . h($t['file']) ?>" data-title="<?= h($t['title']) ?>" data-list="lib">▶</button>
-                                <a href="download.php?file=<?= h($t['file']) ?>" class="px-2 py-1 bg-blue-500 text-white rounded">⬇</a>
-                                <form action="actions.php" method="post">
-                                    <input type="hidden" name="csrf" value="<?= $csrf ?>"><input type="hidden" name="file" value="<?= h($t['file']) ?>">
-                                    <button name="action" value="pl_add" class="px-2 py-1 bg-indigo-500 text-white rounded">＋ Playlist</button>
-                                </form>
-                                <form action="actions.php" method="post" onsubmit="return confirm('Ștergi fișierul?')">
-                                    <input type="hidden" name="csrf" value="<?= $csrf ?>"><input type="hidden" name="file" value="<?= h($t['file']) ?>">
-                                    <button name="action" value="delete" class="px-2 py-1 bg-red-500 text-white rounded">🗑</button>
+                                <button class="play-btn px-2 py-1 bg-green-500 hover:bg-green-600 text-white rounded inline-flex items-center" title="Redă" aria-label="Redă"
+    data-src="<?= AUDIO_URL . h($t['file']) ?>" data-title="<?= h($t['title']) ?>" data-list="lib"><?= icon('play') ?></button>
+<a href="download.php?file=<?= h($t['file']) ?>" class="px-2 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded inline-flex items-center" title="Descarcă" aria-label="Descarcă"><?= icon('download') ?></a>
+<form action="actions.php" method="post">
+    <input type="hidden" name="csrf" value="<?= $csrf ?>"><input type="hidden" name="file" value="<?= h($t['file']) ?>">
+    <button name="action" value="pl_add" class="px-2 py-1 bg-indigo-500 hover:bg-indigo-600 text-white rounded inline-flex items-center gap-1" title="Adaugă în playlist"><?= icon('plus') ?> Playlist</button>
+</form>
+<form action="actions.php" method="post" onsubmit="return confirm('Ștergi fișierul?')">
+    <input type="hidden" name="csrf" value="<?= $csrf ?>"><input type="hidden" name="file" value="<?= h($t['file']) ?>">
+    <button name="action" value="delete" class="px-2 py-1 bg-red-500 hover:bg-red-600 text-white rounded inline-flex items-center" title="Șterge" aria-label="Șterge"><?= icon('trash') ?></button>
+</form>
                                 </form>
                             </div>
                         </li>
@@ -91,13 +93,14 @@ unset($_SESSION['flash']);
                             <span class="font-medium"><?= h($t['title']) ?></span>
                             <span class="text-xs text-gray-500">(<?= $t['duration'] ?>)</span>
                             <div class="flex flex-wrap gap-1 mt-1 text-sm">
-                                <button class="play-btn px-2 py-1 bg-green-500 text-white rounded"
-                                    data-src="<?= AUDIO_URL . h($t['file']) ?>" data-title="<?= h($t['title']) ?>" data-list="pl">▶</button>
+                            
+                                  <button class="play-btn px-2 py-1 bg-green-500 hover:bg-green-600 text-white rounded inline-flex items-center" title="Redă" aria-label="Redă"
+    data-src="<?= AUDIO_URL . h($t['file']) ?>" data-title="<?= h($t['title']) ?>" data-list="pl"><?= icon('play') ?></button>
                                 <form action="actions.php" method="post" class="flex gap-1">
                                     <input type="hidden" name="csrf" value="<?= $csrf ?>"><input type="hidden" name="file" value="<?= h($t['file']) ?>">
-                                    <button name="action" value="pl_up" class="px-2 py-1 bg-gray-300 rounded">↑</button>
-                                    <button name="action" value="pl_down" class="px-2 py-1 bg-gray-300 rounded">↓</button>
-                                    <button name="action" value="pl_remove" class="px-2 py-1 bg-red-400 text-white rounded">✕</button>
+                                 <button name="action" value="pl_up" class="px-2 py-1 bg-gray-300 hover:bg-gray-400 rounded inline-flex items-center" title="Mută sus" aria-label="Mută sus"><?= icon('arrow-up') ?></button>
+<button name="action" value="pl_down" class="px-2 py-1 bg-gray-300 hover:bg-gray-400 rounded inline-flex items-center" title="Mută jos" aria-label="Mută jos"><?= icon('arrow-down') ?></button>
+<button name="action" value="pl_remove" class="px-2 py-1 bg-red-400 hover:bg-red-500 text-white rounded inline-flex items-center" title="Scoate din playlist" aria-label="Scoate din playlist"><?= icon('x') ?></button>
                                 </form>
                             </div>
                         </li>
@@ -110,7 +113,7 @@ unset($_SESSION['flash']);
     <!-- Player fix jos -->
     <div class="fixed bottom-0 inset-x-0 bg-gray-900 text-white p-3 shadow-lg">
         <div class="max-w-6xl mx-auto">
-            <p id="now-playing" class="text-sm mb-2 truncate">Selectează o melodie</p>
+            <p class="text-sm mb-2 flex items-center gap-2 min-w-0"><?= icon('music') ?><span id="now-playing" class="truncate">Selectează o melodie</span></p>
             <audio id="player" controls class="w-full"></audio>
         </div>
     </div>
